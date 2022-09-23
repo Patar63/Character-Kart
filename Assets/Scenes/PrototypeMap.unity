@@ -206,7 +206,7 @@ Light:
     m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
-    m_Strength: 1
+    m_Strength: 0
     m_Bias: 0.05
     m_NormalBias: 0.4
     m_NearPlane: 0.2
@@ -10235,7 +10235,7 @@ MonoBehaviour:
   - {fileID: 586107855}
   terrainSplatTextures:
   - Splat 1 - NewLayer
-  activeTerrain: {fileID: 586107855}
+  activeTerrain: {fileID: 0}
   activeTerrainY: 0
   selectedTerrain: 0
   selectedRoadsOnly: 0
@@ -10415,17 +10415,16 @@ MonoBehaviour:
   OQCCQQOODCScript: {fileID: 0}
   OQDQOCOCCOElement: -1
   OQQDDCOCCC: -1
-  OQOOOQOQQC: {fileID: 375805461}
-  OQQQDQODDO: {fileID: 375805461}
+  OQOOOQOQQC: {fileID: 0}
+  OQQQDQODDO: {fileID: 0}
   OQDCCCCOQC: {fileID: 0}
-  OODQOQCDCC: 32
+  OODQOQCDCC: -1
   selectedRoadSOMarker: -1
   selectedMarkerNode: -1
   selectedMarkerNodes: 
   selectedMarkerSONode: -1
   selectedMarkerSONodes: 
-  selectedObjects:
-  - {fileID: 1343515253}
+  selectedObjects: []
   selectedExitRoad: -1
   newRoadFlag: 0
   roadTypeUpdateFlag: 1
@@ -11799,7 +11798,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh37760
+  m_Name: pb_Mesh38168
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -12630,23 +12629,6 @@ MonoBehaviour:
   perpDirRotated: {x: 0.9994561, y: 0.000016403188, z: -0.03297727}
   markerStartUVY: 0.2446289
   customPoints: []
---- !u!114 &1343515253
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 561528938, guid: f56d46228aee4734f9114056c53bb57e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  roadScr: {fileID: 375805461}
-  prefabScr: {fileID: 0}
-  markers: 20000000
-  startEnd: 0
-  prefab: {fileID: 0}
 --- !u!114 &1357966642
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14287,19 +14269,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 559416624676828921, guid: e2cd20e8fbe3d8a48ba58306b00b4fd6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 177.88026
+      value: 141.09
       objectReference: {fileID: 0}
     - target: {fileID: 559416624676828921, guid: e2cd20e8fbe3d8a48ba58306b00b4fd6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 12.726748
+      value: 20.86
       objectReference: {fileID: 0}
     - target: {fileID: 559416624676828921, guid: e2cd20e8fbe3d8a48ba58306b00b4fd6, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 271.69
+      value: 52.78
       objectReference: {fileID: 0}
     - target: {fileID: 559416624676828921, guid: e2cd20e8fbe3d8a48ba58306b00b4fd6, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.00000058114523
+      value: -0.87191975
       objectReference: {fileID: 0}
     - target: {fileID: 559416624676828921, guid: e2cd20e8fbe3d8a48ba58306b00b4fd6, type: 3}
       propertyPath: m_LocalRotation.x
@@ -14307,7 +14289,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 559416624676828921, guid: e2cd20e8fbe3d8a48ba58306b00b4fd6, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -1
+      value: -0.48964876
       objectReference: {fileID: 0}
     - target: {fileID: 559416624676828921, guid: e2cd20e8fbe3d8a48ba58306b00b4fd6, type: 3}
       propertyPath: m_LocalRotation.z
@@ -14319,7 +14301,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 559416624676828921, guid: e2cd20e8fbe3d8a48ba58306b00b4fd6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -180
+      value: -301.365
       objectReference: {fileID: 0}
     - target: {fileID: 559416624676828921, guid: e2cd20e8fbe3d8a48ba58306b00b4fd6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
