@@ -34,15 +34,17 @@ public class KartController : MonoBehaviour
 
     [SerializeField] private Wheel[] wheels = new Wheel[numOfWheels];
     [SerializeField]
-    private float torque_max = 2000.0f,
-                  brakeTorque_max = 500.0f,
+    private float torque_max = 1000.0f,
+                  brakeTorque_max = 10000.0f,
                   steerAngle_max = 30.0f;
     [SerializeField] private static int NumOfGears = 5;
 
     [SerializeField] private float gravMult = 100.0f;
-    [SerializeField] private float speed_max = 360, speed_min = -10;
+    [SerializeField] private float speed_max = 200, speed_min = -10;
 
     private bool isSpeedingUp = false, isSlowingDown = false, isHandbrake = false;
+
+    public bool isBoost = false;
 
     private bool isMoveingForward = true;
    
@@ -68,7 +70,7 @@ public class KartController : MonoBehaviour
         wheel._gameObject.transform.rotation = wRot;
     }
     
-    private void vehicleMove(float torqueForce, float steerInput, bool handBrake)
+    private void vehicleMove(float torqueForce, float steerInput, bool handBrake, bool boost)
     {
         isHandbrake = handBrake;
 
@@ -92,6 +94,8 @@ public class KartController : MonoBehaviour
             isSpeedingUp = isSlowingDown = false;
         }
 
+        isBoost = boost;
+
         for(int i = 0; i < wheels.Length; ++i)
         {
             if (wheels[i]._wCollider == null)
@@ -109,14 +113,19 @@ public class KartController : MonoBehaviour
                 if (isSpeedingUp)
                 {
                     wheels[i]._wCollider.motorTorque = torqueForce * torque_max / 4.0f;
+                    if (isBoost)
+                    {
+                        //wheels[i]._wCollider.motorTorque = torqueForce * torque_max * 4.0f;
+                        _rigidbody.velocity = (speed_max / 1.0f) * _rigidbody.velocity.normalized;
+                    }
                 }
                 else if (isSlowingDown)
                 {
-                    if(_rigidbody.velocity.magnitude > 0.0f && isMoveingForward)
+                    if(isMoveingForward)
                     {
                         if (wheels[i]._wLocation == Wheel_Location.Front_Left || wheels[i]._wLocation == Wheel_Location.Front_Right)
                         {
-                            wheels[i]._wCollider.motorTorque = torqueForce * brakeTorque_max / 2.0f;
+                            wheels[i]._wCollider.motorTorque = torqueForce * brakeTorque_max;
                             //wheels[i]._wCollider.brakeTorque = brakeTorque_max * 40.0f;
                         }
                         else
@@ -132,6 +141,10 @@ public class KartController : MonoBehaviour
                 }
                 else
                 {
+                    if(Mathf.Approximately(_rigidbody.velocity.magnitude, 0.0f))
+                    {
+
+                    }
                     wheels[i]._wCollider.motorTorque = 0.0f;
                 }
                     
@@ -141,7 +154,7 @@ public class KartController : MonoBehaviour
                 if (wheels[i]._wLocation == Wheel_Location.Rear_Left
                        || wheels[i]._wLocation == Wheel_Location.Rear_Right)
                 {
-                    wheels[i]._wCollider.brakeTorque = brakeTorque_max * 20.0f;
+                    wheels[i]._wCollider.brakeTorque = brakeTorque_max * 50.0f;
                 }
                 wheels[i]._wCollider.motorTorque = 0.0f;
             }
@@ -151,8 +164,6 @@ public class KartController : MonoBehaviour
 
            
         }
-
-        
 
         applyDownForce();
         ApplySpeed();
@@ -175,7 +186,7 @@ public class KartController : MonoBehaviour
 
         float direcIdentifier = Vector3.Dot(_rigidbody.velocity, this.transform.forward);
 
-        if (isMoveingForward && speed > speed_max)
+        if (isMoveingForward && speed > speed_max && !isBoost)
         {
             _rigidbody.velocity = (speed_max / 3.6f) * _rigidbody.velocity.normalized;
             
@@ -185,7 +196,7 @@ public class KartController : MonoBehaviour
             _rigidbody.velocity = -(speed_min / 3.6f) * _rigidbody.velocity.normalized;
         }
 
-        Debug.Log(isMoveingForward ? speed : -speed);
+        Debug.Log(isMoveingForward ? speed : -speed + "KM/H");
     }
 
     private void updateMovingDirection()
@@ -215,14 +226,18 @@ public class KartController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        float motorInput = 0.0f, steerInput = 0.0f;
-        bool handBrakeInput = false;
+        float motorInput, steerInput;
+        bool handBrakeInput;
+
+        bool boostInput;
 
         motorInput = Input.GetAxis("Vertical");
         steerInput = Input.GetAxis("Horizontal");
         handBrakeInput = Input.GetButton("Jump");
 
-        vehicleMove(motorInput, steerInput, handBrakeInput);
+        boostInput = Input.GetKey(KeyCode.LeftShift);
+
+        vehicleMove(motorInput, steerInput, handBrakeInput, boostInput);
         updateMovingDirection();
     }
 }
